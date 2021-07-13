@@ -1,0 +1,30 @@
+import re
+import requests
+
+
+
+def dowmloadPic(html, keyword):
+    pic_url = re.findall('"objURL":"(.*?)",', html, re.S)
+    i = 1
+    print('找到关键词:' + keyword + '的图片，现在开始下载图片...')
+    print(pic_url)
+    # for each in pic_url:
+    #     print('正在下载第' + str(i) + '张图片，图片地址:' + str(each))
+    #     try:
+    #         pic = requests.get(each, timeout=10)
+    #     except requests.exceptions.ConnectionError:
+    #         print('【错误】当前图片无法下载')
+    #         continue
+
+    #     dir = '../images/' + keyword + '_' + str(i) + '.jpg'
+    #     fp = open(dir, 'wb')
+    #     fp.write(pic.content)
+    #     fp.close()
+    #     i += 1
+
+
+if __name__ == '__main__':
+    word = input("Input 图片命名: ")
+    url = 'https://www.qqtn.com/article/article_276001_1.html'
+    result = requests.get(url=url, allow_redirects=False)
+    dowmloadPic(result.text, word)
